@@ -1,15 +1,45 @@
-# Implement-NFA-with-epsilon-move-to-DFA-Conversion
-"Implementation of Nondeterministic Finite Automaton (NFA) with epsilon transitions converted to Deterministic Finite Automaton (DFA), facilitating efficient pattern recognition and language processing in computational models."
+# 🔁 Epsilon-NFA to DFA Conversion using Python and Graphviz
 
-1. Create a graph GD with vertex {q0}. Identify this vertex as the initial
-vertex.
-2. Repeat the following steps until no more edges are missing.
-Take any vertex {qi, qj , ..., qk} of GD that has no outgoing edge for some
-a ∈ Σ. Compute δ∗N (qi, a), δ∗N (qj , a), ..., δ∗N (qk, a).
-If δ∗N (qi, a) ∪ δ∗N (qj , a) ∪ ... ∪ δ∗N (qk, a) = {ql, qm, ..., qn},
-create a vertex for GD labeled {ql, qm, ..., qn} if it does not already exist.
-Add to GD an edge from {qi, qj , ..., qk} to {ql, qm, ..., qn} and label it
-with a.
-4. Every state of GD whose label contains any qf ∈ FN is identified as a
-final vertex.
-5. If MN accepts λ, the vertex {q0} in GD is also made a final vertex.
+This project implements the conversion of a **Nondeterministic Finite Automaton (NFA)** with **epsilon (ε) transitions** into an equivalent **Deterministic Finite Automaton (DFA)** using Python. It visualizes both the E-NFA and resulting DFA using the `graphviz` library for clear graphical representation.
+
+---
+
+## 🎯 Objective
+
+To automate the **subset construction algorithm** for ε-NFA to DFA conversion, which is crucial in compiler design and lexical analysis for transforming ambiguous state machines into deterministic ones.
+
+---
+
+## 🧠 Concept Overview
+
+1. **Epsilon Closure Calculation**:
+   - For each state, compute the set of states reachable via epsilon (ε) transitions.
+
+2. **Subset Construction**:
+   - Begin with the ε-closure of the start state.
+   - For each DFA state and input symbol, compute the union of ε-closures of transitions from all included NFA states.
+
+3. **Final States**:
+   - Any DFA state containing at least one NFA final state is marked as a DFA final state.
+
+4. **Dead State (ϕ)**:
+   - Transitions that result in no reachable state are routed to a universal dead state ϕ.
+
+---
+
+## ⚙️ How It Works
+
+- Takes input from the user: states, alphabets, transitions (including epsilon 'e'), and final states.
+- Constructs an internal transition table using dictionaries.
+- Uses BFS-like logic to explore all reachable combinations (subsets of NFA states) and form DFA states.
+- Renders both the E-NFA and DFA using **Graphviz** as `.pdf` or `.png` files.
+
+---
+
+## 📦 Requirements
+
+- Python 3.x
+- [graphviz](https://graphviz.org/download/)
+- Python `graphviz` module
+  ```bash
+  pip install graphviz
